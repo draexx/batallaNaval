@@ -28,6 +28,10 @@ public class CampoBatalla {
         return disparosRealizados;
     }
 
+    /**
+     *
+     * @param disparosRealizados
+     */
     public void setDisparosRealizados(ArrayList<Coordenada> disparosRealizados) {
         this.disparosRealizados = disparosRealizados;
     }

@@ -47,6 +47,17 @@ public class Coordenada {
 
     @Override
     public boolean equals(Object coordenada) {
+        /*if (coordenada instanceof Coordenada){
+            Coordenada objeto = new Coordenada();
+            objeto = (Coordenada) coordenada;
+            if(objeto.getPosX()== this.posX && objeto.getPosY() == this.posY){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }*/
         if ((coordenada instanceof Coordenada) && ( ((Coordenada) coordenada).getPosX() == this.posX  &&  ((Coordenada) coordenada).getPosY() == this.posY)){
             return true;
         }else{

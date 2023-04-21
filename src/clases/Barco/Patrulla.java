@@ -1,8 +1,8 @@
 package clases.Barco;
 
 public class Patrulla extends Barco{
-    public Patrulla(Integer tamanio, Boolean direccion) {
-        super(tamanio, direccion);
+    public Patrulla(Boolean direccion) {
+        super(1, direccion);
     }
 
 }

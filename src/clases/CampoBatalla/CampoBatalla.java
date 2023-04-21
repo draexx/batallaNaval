@@ -13,13 +13,16 @@ public class CampoBatalla {
     private ArrayList<Coordenada> disparosRealizados;
 
     /**
-     * Constructor de la clase
+     * Constructores de la clase
      */
     public CampoBatalla() {
         barcoEnCampo = new ArrayList<Barco>();
         disparosRealizados = new ArrayList<Coordenada>();
     }
 
+    public CampoBatalla(Integer dimension){
+        this.setDimension(dimension);
+    }
     /**
      * Metodo que devuelve los disparos realizados
      * @return Lista de disparos Realizados
@@ -29,8 +32,8 @@ public class CampoBatalla {
     }
 
     /**
-     *
-     * @param disparosRealizados
+     * Metodo para asignar el disparo realizado
+     * @param disparosRealizados de tipo ArrayList
      */
     public void setDisparosRealizados(ArrayList<Coordenada> disparosRealizados) {
         this.disparosRealizados = disparosRealizados;
@@ -69,33 +72,31 @@ public class CampoBatalla {
     }
 
     public void agregarBarco(Barco barco){
-        /*if (this.barcoEnCampo.add(barco)){
-            return "Se agrego barco";
-        }else{
-            return "no Se agrego barco";
-        }*/
         this.barcoEnCampo.add(barco);
     }
     public void disparar(Coordenada disparo){
         this.disparo = disparo;
-        Boolean disp = false;
+        boolean acierto = false;
+        boolean nuevoDisparo = true;
         if (this.getDisparosRealizados().size() == 0){
             this.getDisparosRealizados().add(disparo);
-            disp = true;
+            acierto = true;
         }else{
-            for (int i =0; i< this.getDisparosRealizados().size();i++){
+            for(int i =0; i< this.getDisparosRealizados().size();i++){
                 if(getDisparo().equals(this.getDisparosRealizados().get(i))){
                     System.out.println("Ya existe el disparo");
-                    disp = false;
-                    break;
-                }else{
-                    System.out.println("Nuevo disparo");
-                    this.getDisparosRealizados().add(disparo);
-                    disp = true;
+                    nuevoDisparo = false;
                     break;
                 }
             }
-            // nuestra verificacion
+            if(nuevoDisparo){
+                System.out.println("Nuevo disparo");
+                this.getDisparosRealizados().add(disparo);
+                acierto = true;
+            }
+        }
+        // verificacion disparo
+        if (acierto){
 
         }
     }

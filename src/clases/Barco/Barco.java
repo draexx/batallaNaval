@@ -52,7 +52,7 @@ public class Barco  {
     public void generarBarco(Integer dimension){
         Random r = new Random();
         Integer pos = r.nextInt(dimension);
-        while(!(pos + tamanio < dimension)){
+        while(!(pos + tamanio <= dimension)){
             pos= r.nextInt(dimension);
         }
         //Horizontal
@@ -85,6 +85,12 @@ public class Barco  {
 
     //verifica hundimiento
     public boolean verificaHundimiento(){
-        return true;
+
+        if (this.resistencia == 0 ){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 }

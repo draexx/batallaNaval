@@ -98,17 +98,16 @@ public class CampoBatalla {
         // verificacion disparo
         if (acierto){
                 for (int i = 0; i<barcoEnCampo.size();i++){
-                    if (this.barcoEnCampo.get(i).verificaHundimiento()){
-                        System.out.println("Se hundio");
-                        continue;
-                    }else{
-                        if(barcoEnCampo.get(i).verificarDisparo(this.getDisparo())){
-                            System.out.println("acerto");
-                            break;
-                        }else{
-                            System.out.println("fallaste");
+                    if(barcoEnCampo.get(i).verificarDisparo(this.getDisparo())){
+                        if (this.barcoEnCampo.get(i).verificaHundimiento()){
+                            System.out.println("Se hundio");
                         }
+                        System.out.println("acerto");
+                        break;
+                    }else{
+                        System.out.println("fallaste");
                     }
+
                 }
         }else{
             System.out.println("nose verifico porque ya existe");

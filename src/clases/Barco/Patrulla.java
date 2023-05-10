@@ -5,4 +5,8 @@ public class Patrulla extends Barco{
         super(1, direccion);
     }
 
+    @Override
+    public boolean verificaHundimiento() {
+        return super.verificaHundimiento();
+    }
 }

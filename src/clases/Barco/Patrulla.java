@@ -52,11 +52,7 @@ public class Patrulla implements interfazBarco {
 
     @Override
     public boolean verificarHundimiento() {
-        if (this.resistencia == 0 ){
-            return true;
-        }else{
-            return false;
-        }
+        return this.resistencia == 0;
     }
 
     public Integer getTAMANIO() {

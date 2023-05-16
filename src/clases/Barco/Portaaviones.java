@@ -15,14 +15,14 @@ public class Portaaviones implements interfazBarco {
     public Portaaviones(boolean direccion) {
         this.direccion = direccion;
         this.coordenadas = new Coordenada[this.TAMANIO];
-
+        this.generarBarco();
     }
 
-    public void generarBarco(Integer dimension){
+    public void generarBarco(){
         Random r = new Random();
         Integer pos = r.nextInt(TAMANIO);
-        while(!(pos + TAMANIO <= dimension)){
-            pos= r.nextInt(dimension);
+        while(!(pos + TAMANIO <= 10)){
+            pos= r.nextInt(10);
         }
         //Horizontal
         if (this.direccion){
@@ -53,7 +53,11 @@ public class Portaaviones implements interfazBarco {
 
     @Override
     public boolean verificarHundimiento() {
-        return false;
+        if (this.resistencia == 0 ){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public Integer getTAMANIO() {

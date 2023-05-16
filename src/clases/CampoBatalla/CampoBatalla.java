@@ -2,12 +2,13 @@ package clases.CampoBatalla;
 
 import clases.Barco.Barco;
 import clases.Coordenada.Coordenada;
+import clases.InterfazBarcos.interfazBarco;
 
 import java.util.ArrayList;
 
 public class CampoBatalla {
     private Coordenada disparo;
-    private ArrayList<Barco> barcoEnCampo;
+    private ArrayList<interfazBarco> barcoEnCampo;
     private Integer dimension;
     private Coordenada coordenadas;
     private ArrayList<Coordenada> disparosRealizados;
@@ -16,7 +17,7 @@ public class CampoBatalla {
      * Constructores de la clase
      */
     public CampoBatalla() {
-        barcoEnCampo = new ArrayList<Barco>();
+        barcoEnCampo = new ArrayList<interfazBarco>();
         disparosRealizados = new ArrayList<Coordenada>();
     }
 
@@ -47,11 +48,11 @@ public class CampoBatalla {
         this.disparo = disparo;
     }
 
-    public ArrayList<Barco> getBarcoEnCampo() {
+    public ArrayList<interfazBarco> getBarcoEnCampo() {
         return barcoEnCampo;
     }
 
-    public void setBarcoEnCampo(ArrayList<Barco> barcoEnCampo) {
+    public void setBarcoEnCampo(ArrayList<interfazBarco> barcoEnCampo) {
         this.barcoEnCampo = barcoEnCampo;
     }
 
@@ -71,7 +72,11 @@ public class CampoBatalla {
         this.coordenadas = coordenadas;
     }
 
-    public void agregarBarco(Barco barco){
+    /**
+     * Metodo para agregar barcos en campo
+     * @param barco parametro de tipo Barco para agregar al campo
+     */
+    public void agregarBarco(interfazBarco barco){
         this.barcoEnCampo.add(barco);
     }
     public void disparar(Coordenada disparo){
@@ -99,7 +104,7 @@ public class CampoBatalla {
         if (acierto){
                 for (int i = 0; i<barcoEnCampo.size();i++){
                     if(barcoEnCampo.get(i).verificarDisparo(this.getDisparo())){
-                        if (this.barcoEnCampo.get(i).verificaHundimiento()){
+                        if (this.barcoEnCampo.get(i).verificarHundimiento()){
                             System.out.println("Se hundio");
                         }
                         System.out.println("acerto");

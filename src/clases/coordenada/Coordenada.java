@@ -50,6 +50,7 @@ public class Coordenada {
 
     @Override
     public boolean equals(Object coordenada) {
-        return (coordenada instanceof Coordenada) && (((Coordenada) coordenada).getPosX() == this.posX && ((Coordenada) coordenada).getPosY() == this.posY);
+        return (coordenada instanceof Coordenada) && (((Coordenada) coordenada).getPosX()
+                == this.posX && ((Coordenada) coordenada).getPosY() == this.posY);
     }
 }

@@ -86,12 +86,6 @@ public class Barco  {
 
     //verifica hundimiento
     public boolean verificaHundimiento(){
-
-        if (this.resistencia == 0 ){
-            return true;
-        }else{
-            return false;
-        }
-
+        return this.resistencia == 0;
     }
 }

@@ -5,6 +5,7 @@ import clases.Coordenada.Coordenada;
 import java.util.Random;
 
 public class Barco  {
+    
     private Integer tamanio;
     private boolean direccion;
     private Integer resistencia;

@@ -7,7 +7,9 @@ import clases.coordenada.Coordenada;
 
 import java.util.Scanner;
 
-// no necesita paquete
+/**
+ * no package declaration
+ */
 public class Main {
     public static void main(String[] args) {
         Scanner t = new Scanner(System.in);

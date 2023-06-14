@@ -1,4 +1,4 @@
-package clases.Barco;
+package clases.barco;
 
 import clases.coordenada.Coordenada;
 import java.util.Random;
@@ -54,7 +54,7 @@ public class Barco  {
     public void generarBarco(Integer dimension){
         Random r = new Random();
         Integer pos = r.nextInt(dimension);
-        while(!(pos + tamanio <= dimension)){
+        while(pos + tamanio > dimension){
             pos= r.nextInt(dimension);
         }
         //Horizontal

@@ -1,4 +1,4 @@
-package clases.CampoBatalla;
+package clases.campoBatalla;
 
 import clases.coordenada.Coordenada;
 import clases.InterfazBarcos.InterfazBarco;

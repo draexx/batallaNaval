@@ -1,22 +1,24 @@
-package clases.Barco;
+package clases.barco;
 
 import clases.coordenada.Coordenada;
 import clases.InterfazBarcos.InterfazBarco;
 import java.util.Random;
 
-public class Patrulla implements InterfazBarco {
+public class Lancha implements InterfazBarco {
     
-    private final Integer TAMANIO = 2;
+    private final Integer TAMANIO = 1;
     private Integer resistencia = TAMANIO;
+    
     private boolean direccion;
+    
     private Coordenada[] coordenadas;
 
-    public Patrulla(boolean direccion) {
+    public Lancha(boolean direccion) {
         this.direccion = direccion;
         this.coordenadas = new Coordenada[this.TAMANIO];
         this.generarBarco();
     }
-
+    
     public void generarBarco(){
         Random r = new Random();
         Integer pos = r.nextInt(TAMANIO);
@@ -34,27 +36,7 @@ public class Patrulla implements InterfazBarco {
             }
         }
     }
-    @Override
-    public boolean verificarDisparo(Coordenada disparo) {
-        boolean acerto = false;
-        for (int i = 0; i < this.getCoordenadas().length;i++){
-            if (this.getCoordenadas()[i].equals((disparo))){
-                System.out.println("Acerto");
-                this.resistencia--;
-                acerto = true;
-                break;
-            }else{
-                System.out.println("fallaste");
-            }
-        }
-        return acerto;
-    }
-
-    @Override
-    public boolean verificarHundimiento() {
-        return this.resistencia == 0;
-    }
-
+    
     public Integer getTAMANIO() {
         return TAMANIO;
     }
@@ -81,5 +63,26 @@ public class Patrulla implements InterfazBarco {
 
     public void setResistencia(Integer resistencia) {
         this.resistencia = resistencia;
+    }
+
+    @Override
+    public boolean verificarDisparo(Coordenada disparo) {
+        boolean acerto = false;
+        for (int i = 0; i < this.getCoordenadas().length;i++){
+            if (this.getCoordenadas()[i].equals((disparo))){
+                System.out.println("Acerto");
+                this.resistencia--;
+                acerto = true;
+                break;
+            }else{
+                System.out.println("fallaste");
+            }
+        }
+        return acerto;
+    }
+
+    @Override
+    public boolean verificarHundimiento() {
+        return this.resistencia == 0;
     }
 }

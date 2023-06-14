@@ -1,8 +1,8 @@
-import clases.Barco.Lancha;
-import clases.Barco.Patrulla;
-import clases.Barco.Portaaviones;
-import clases.Barco.Submarino;
-import clases.CampoBatalla.CampoBatalla;
+import clases.barco.Lancha;
+import clases.barco.Patrulla;
+import clases.barco.Portaaviones;
+import clases.barco.Submarino;
+import clases.campoBatalla.CampoBatalla;
 import clases.coordenada.Coordenada;
 
 import java.util.Scanner;

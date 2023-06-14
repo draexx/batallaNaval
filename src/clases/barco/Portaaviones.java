@@ -1,28 +1,26 @@
-package clases.Barco;
+package clases.barco;
 
 import clases.coordenada.Coordenada;
 import clases.InterfazBarcos.InterfazBarco;
 import java.util.Random;
 
-public class Lancha implements InterfazBarco {
-    
-    private final Integer TAMANIO = 1;
-    private Integer resistencia = TAMANIO;
-    
-    private boolean direccion;
-    
-    private Coordenada[] coordenadas;
+public class Portaaviones implements InterfazBarco {
 
-    public Lancha(boolean direccion) {
+    private final Integer TAMANIO = 4;
+    private boolean direccion;
+    private Coordenada[] coordenadas;
+    private Integer resistencia = TAMANIO;
+
+    public Portaaviones(boolean direccion) {
         this.direccion = direccion;
         this.coordenadas = new Coordenada[this.TAMANIO];
         this.generarBarco();
     }
-    
+
     public void generarBarco(){
         Random r = new Random();
         Integer pos = r.nextInt(TAMANIO);
-        while(!(pos + TAMANIO <= 10)){
+        while(pos + TAMANIO > 10){
             pos= r.nextInt(10);
         }
         //Horizontal
@@ -36,7 +34,27 @@ public class Lancha implements InterfazBarco {
             }
         }
     }
-    
+    @Override
+    public boolean verificarDisparo(Coordenada disparo) {
+        boolean acerto = false;
+        for (int i = 0; i < this.getCoordenadas().length;i++){
+            if (this.getCoordenadas()[i].equals((disparo))){
+                System.out.println("Acerto");
+                this.resistencia--;
+                acerto = true;
+                break;
+            }else{
+                System.out.println("fallaste");
+            }
+        }
+        return acerto;
+    }
+
+    @Override
+    public boolean verificarHundimiento() {
+        return this.resistencia == 0;
+    }
+
     public Integer getTAMANIO() {
         return TAMANIO;
     }
@@ -63,26 +81,5 @@ public class Lancha implements InterfazBarco {
 
     public void setResistencia(Integer resistencia) {
         this.resistencia = resistencia;
-    }
-
-    @Override
-    public boolean verificarDisparo(Coordenada disparo) {
-        boolean acerto = false;
-        for (int i = 0; i < this.getCoordenadas().length;i++){
-            if (this.getCoordenadas()[i].equals((disparo))){
-                System.out.println("Acerto");
-                this.resistencia--;
-                acerto = true;
-                break;
-            }else{
-                System.out.println("fallaste");
-            }
-        }
-        return acerto;
-    }
-
-    @Override
-    public boolean verificarHundimiento() {
-        return this.resistencia == 0;
     }
 }

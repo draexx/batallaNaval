@@ -7,9 +7,12 @@ import java.util.ArrayList;
 
 public class CampoBatalla {
     private Coordenada disparo;
-    private ArrayList<InterfazBarco> barcoEnCampo;
-    private Integer dimension;
     private Coordenada coordenadas;
+
+    private ArrayList<InterfazBarco> barcoEnCampo;
+
+    private Integer dimension;
+
     private ArrayList<Coordenada> disparosRealizados;
 
     /**
@@ -78,6 +81,7 @@ public class CampoBatalla {
     public void agregarBarco(InterfazBarco barco){
         this.barcoEnCampo.add(barco);
     }
+
     public void disparar(Coordenada disparo){
         this.disparo = disparo;
         boolean acierto = false;

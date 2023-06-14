@@ -34,6 +34,7 @@ public class Portaaviones implements InterfazBarco {
             }
         }
     }
+
     @Override
     public boolean verificarDisparo(Coordenada disparo) {
         boolean acerto = false;

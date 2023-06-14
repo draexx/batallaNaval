@@ -2,7 +2,7 @@ import clases.barco.Lancha;
 import clases.barco.Patrulla;
 import clases.barco.Portaaviones;
 import clases.barco.Submarino;
-import clases.campoBatalla.CampoBatalla;
+import clases.campobatalla.CampoBatalla;
 import clases.coordenada.Coordenada;
 
 import java.util.Scanner;
@@ -31,7 +31,8 @@ public class Main {
         campo.agregarBarco(lancha);
         campo.mostrarBarcos();
 
-        while(!(patrulla.verificarHundimiento() && lancha.verificarHundimiento() && portaAviones.verificarHundimiento() && submarino.verificarHundimiento())){
+        while(!(patrulla.verificarHundimiento() && lancha.verificarHundimiento() && portaAviones.verificarHundimiento()
+                && submarino.verificarHundimiento())){
             System.out.println("Genera posX");
             corX = t.nextInt();
             System.out.println("Genera posY");

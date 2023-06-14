@@ -1,4 +1,4 @@
-package clases.campoBatalla;
+package clases.campobatalla;
 
 import clases.coordenada.Coordenada;
 import clases.InterfazBarcos.InterfazBarco;
@@ -26,6 +26,7 @@ public class CampoBatalla {
     public CampoBatalla(Integer dimension){
         this.setDimension(dimension);
     }
+
     /**
      * Metodo que devuelve los disparos realizados
      * @return Lista de disparos Realizados

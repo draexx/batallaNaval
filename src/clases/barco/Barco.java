@@ -6,6 +6,7 @@ import java.util.Random;
 public class Barco  {
     
     private Integer tamanio;
+
     private Integer resistencia;
 
     private boolean direccion;

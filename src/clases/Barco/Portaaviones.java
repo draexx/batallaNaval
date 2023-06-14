@@ -2,7 +2,6 @@ package clases.Barco;
 
 import clases.Coordenada.Coordenada;
 import clases.InterfazBarcos.interfazBarco;
-
 import java.util.Random;
 
 public class Portaaviones implements interfazBarco {

@@ -11,8 +11,8 @@ public class Coordenada {
     /**
      * Metodo que recibe 2 parametros, estos recibiran como argumentos "x" y "y"
      * de una coordenada
-     * @param posX
-     * @param posY
+     * @param posX posicion en X
+     * @param posY posicion en Y
      */
     public Coordenada(Integer posX, Integer posY) {
         this.posX = posX;
@@ -50,21 +50,6 @@ public class Coordenada {
 
     @Override
     public boolean equals(Object coordenada) {
-        /*if (coordenada instanceof Coordenada){
-            Coordenada objeto = new Coordenada();
-            objeto = (Coordenada) coordenada;
-            if(objeto.getPosX()== this.posX && objeto.getPosY() == this.posY){
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            return false;
-        }*/
-        if ((coordenada instanceof Coordenada) && ( ((Coordenada) coordenada).getPosX() == this.posX  &&  ((Coordenada) coordenada).getPosY() == this.posY)){
-            return true;
-        }else{
-            return false;
-        }
+        return (coordenada instanceof Coordenada) && (((Coordenada) coordenada).getPosX() == this.posX && ((Coordenada) coordenada).getPosY() == this.posY);
     }
 }

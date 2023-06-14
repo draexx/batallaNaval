@@ -7,15 +7,18 @@ import java.util.Random;
 public class Lancha implements interfazBarco {
     
     private final Integer TAMANIO = 1;
-    private boolean direccion;
-    private Coordenada[] coordenadas;
     private Integer resistencia = TAMANIO;
+    
+    private boolean direccion;
+    
+    private Coordenada[] coordenadas;
 
     public Lancha(boolean direccion) {
         this.direccion = direccion;
         this.coordenadas = new Coordenada[this.TAMANIO];
         this.generarBarco();
     }
+    
     public void generarBarco(){
         Random r = new Random();
         Integer pos = r.nextInt(TAMANIO);
@@ -33,6 +36,7 @@ public class Lancha implements interfazBarco {
             }
         }
     }
+    
     public Integer getTAMANIO() {
         return TAMANIO;
     }

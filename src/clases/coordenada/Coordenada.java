@@ -1,4 +1,4 @@
-package clases.Coordenada;
+package clases.coordenada;
 
 //import java.util.Objects;
 

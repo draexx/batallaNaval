@@ -1,8 +1,8 @@
 package clases.InterfazBarcos;
 
-import clases.Coordenada.Coordenada;
+import clases.coordenada.Coordenada;
 
-public interface interfazBarco {
+public interface InterfazBarco {
 
     public boolean verificarDisparo(Coordenada disparo);
     public boolean verificarHundimiento();

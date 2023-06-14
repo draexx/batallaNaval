@@ -1,10 +1,10 @@
 package clases.Barco;
 
-import clases.Coordenada.Coordenada;
-import clases.InterfazBarcos.interfazBarco;
+import clases.coordenada.Coordenada;
+import clases.InterfazBarcos.InterfazBarco;
 import java.util.Random;
 
-public class Lancha implements interfazBarco {
+public class Lancha implements InterfazBarco {
     
     private final Integer TAMANIO = 1;
     private Integer resistencia = TAMANIO;

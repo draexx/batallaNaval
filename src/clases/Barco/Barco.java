@@ -1,6 +1,6 @@
 package clases.Barco;
 
-import clases.Coordenada.Coordenada;
+import clases.coordenada.Coordenada;
 import java.util.Random;
 
 public class Barco  {

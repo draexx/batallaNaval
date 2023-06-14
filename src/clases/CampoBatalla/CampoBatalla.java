@@ -1,13 +1,13 @@
 package clases.CampoBatalla;
 
-import clases.Coordenada.Coordenada;
-import clases.InterfazBarcos.interfazBarco;
+import clases.coordenada.Coordenada;
+import clases.InterfazBarcos.InterfazBarco;
 
 import java.util.ArrayList;
 
 public class CampoBatalla {
     private Coordenada disparo;
-    private ArrayList<interfazBarco> barcoEnCampo;
+    private ArrayList<InterfazBarco> barcoEnCampo;
     private Integer dimension;
     private Coordenada coordenadas;
     private ArrayList<Coordenada> disparosRealizados;
@@ -16,7 +16,7 @@ public class CampoBatalla {
      * Constructores de la clase
      */
     public CampoBatalla() {
-        barcoEnCampo = new ArrayList<interfazBarco>();
+        barcoEnCampo = new ArrayList<InterfazBarco>();
         disparosRealizados = new ArrayList<Coordenada>();
     }
 
@@ -47,11 +47,11 @@ public class CampoBatalla {
         this.disparo = disparo;
     }
 
-    public ArrayList<interfazBarco> getBarcoEnCampo() {
+    public ArrayList<InterfazBarco> getBarcoEnCampo() {
         return barcoEnCampo;
     }
 
-    public void setBarcoEnCampo(ArrayList<interfazBarco> barcoEnCampo) {
+    public void setBarcoEnCampo(ArrayList<InterfazBarco> barcoEnCampo) {
         this.barcoEnCampo = barcoEnCampo;
     }
 
@@ -75,7 +75,7 @@ public class CampoBatalla {
      * Metodo para agregar barcos en campo
      * @param barco parametro de tipo Barco para agregar al campo
      */
-    public void agregarBarco(interfazBarco barco){
+    public void agregarBarco(InterfazBarco barco){
         this.barcoEnCampo.add(barco);
     }
     public void disparar(Coordenada disparo){

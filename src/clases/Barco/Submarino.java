@@ -34,6 +34,7 @@ public class Submarino implements interfazBarco {
             }
         }
     }
+    
     public Integer getTAMANIO() {
         return TAMANIO;
     }

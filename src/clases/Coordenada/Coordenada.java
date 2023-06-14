@@ -1,13 +1,15 @@
 package clases.Coordenada;
 
-import java.util.Objects;
+//import java.util.Objects;
 
 public class Coordenada {
+    
     private Integer posX;
     private Integer posY;
 
     /**
-     * Metodo que recibe 2 parametros, estos recibiran como argumentos "x" y "y" de una coordenada
+     * Metodo que recibe 2 parametros, estos recibiran como argumentos "x" y "y" de una
+     * coordenada
      * @param posX
      * @param posY
      */

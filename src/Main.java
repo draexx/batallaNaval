@@ -31,8 +31,8 @@ public class Main {
         campo.agregarBarco(lancha);
         campo.mostrarBarcos();
 
-        while(!(patrulla.verificarHundimiento() && lancha.verificarHundimiento() && portaAviones.verificarHundimiento()
-                && submarino.verificarHundimiento())){
+        while(!(patrulla.verificarHundimiento() && lancha.verificarHundimiento()
+                && portaAviones.verificarHundimiento() && submarino.verificarHundimiento())){
             System.out.println("Genera posX");
             corX = t.nextInt();
             System.out.println("Genera posY");

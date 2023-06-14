@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class CampoBatalla {
     private Coordenada disparo;
+
     private Coordenada coordenadas;
 
     private ArrayList<InterfazBarco> barcoEnCampo;

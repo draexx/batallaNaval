@@ -7,8 +7,11 @@ import java.util.Random;
 public class Barco  {
     
     private Integer tamanio;
+    
     private boolean direccion;
+    
     private Integer resistencia;
+    
     private Coordenada[] coordenadas;
 
     public Barco(Integer tamanio, boolean direccion) {

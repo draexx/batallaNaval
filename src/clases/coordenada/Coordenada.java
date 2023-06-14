@@ -5,6 +5,7 @@ package clases.coordenada;
 public class Coordenada {
     
     private Integer posX;
+
     private Integer posY;
 
     /**

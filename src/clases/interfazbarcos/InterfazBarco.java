@@ -1,4 +1,4 @@
-package clases.InterfazBarcos;
+package clases.interfazbarcos;
 
 import clases.coordenada.Coordenada;
 

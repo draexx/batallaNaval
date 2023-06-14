@@ -1,12 +1,13 @@
 package clases.barco;
 
 import clases.coordenada.Coordenada;
-import clases.InterfazBarcos.InterfazBarco;
+import clases.interfazbarcos.InterfazBarco;
 import java.util.Random;
 
 public class Lancha implements InterfazBarco {
     
     private final Integer TAMANIO = 1;
+
     private Integer resistencia = TAMANIO;
     
     private boolean direccion;

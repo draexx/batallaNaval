@@ -1,7 +1,7 @@
 package clases.campobatalla;
 
 import clases.coordenada.Coordenada;
-import clases.InterfazBarcos.InterfazBarco;
+import clases.interfazbarcos.InterfazBarco;
 
 import java.util.ArrayList;
 
@@ -37,10 +37,10 @@ public class CampoBatalla {
 
     /**
      * Metodo para asignar el disparo realizado
-     * @param disparosRealizados de tipo ArrayList
+     * @param disparoRealizado de tipo ArrayList
      */
-    public void setDisparosRealizados(ArrayList<Coordenada> disparosRealizados) {
-        this.disparosRealizados = disparosRealizados;
+    public void setDisparosRealizados(ArrayList<Coordenada> disparoRealizado) {
+        this.disparosRealizados = disparoRealizado;
     }
 
     public Coordenada getDisparo() {

@@ -2,10 +2,10 @@ package clases.Barco;
 
 import clases.Coordenada.Coordenada;
 import clases.InterfazBarcos.interfazBarco;
-
 import java.util.Random;
 
 public class Lancha implements interfazBarco {
+    
     private final Integer TAMANIO = 1;
     private boolean direccion;
     private Coordenada[] coordenadas;

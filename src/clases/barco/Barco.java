@@ -1,23 +1,21 @@
 package clases.barco;
 
 import clases.coordenada.Coordenada;
+import clases.interfazbarcos.InterfazBarco;
 import java.util.Random;
 
-public class Barco  {
-    
-    private Integer tamanio;
+public abstract class Barco implements InterfazBarco {
 
-    private Integer resistencia;
-
-    private boolean direccion;
-    
-    private Coordenada[] coordenadas;
+    protected Integer tamanio;
+    protected Integer resistencia;
+    protected boolean direccion; // true para horizontal, false para vertical
+    protected Coordenada[] coordenadas;
 
     public Barco(Integer tamanio, boolean direccion) {
         this.tamanio = tamanio;
         this.direccion = direccion;
         this.coordenadas = new Coordenada[tamanio];
-
+        this.resistencia = tamanio; // La resistencia inicial es igual al tamaño
     }
 
     public boolean isDireccion() {
@@ -52,42 +50,74 @@ public class Barco  {
         this.coordenadas = coordenadas;
     }
 
-    public void generarBarco(Integer dimension){
-        Random r = new Random();
-        Integer pos = r.nextInt(dimension);
-        while(pos + tamanio > dimension){
-            pos= r.nextInt(dimension);
-        }
-        //Horizontal
-        if (this.direccion){
-            for (int i=pos, j=0;i< pos+tamanio;i++,j++){
-                coordenadas[j] = new Coordenada(i,pos);
+    // Este método debe ser llamado después de que el barco es creado por una subclase.
+    // Opcionalmente, podría ser llamado desde el constructor de CampoBatalla al agregar el barco.
+    public void generarCoordenadas(int dimensionMaximaCampo) {
+        Random random = new Random();
+        int startPos;
+        // Asegura que el barco quepa completamente dentro del tablero
+        if (direccion) { // Horizontal
+            // La coordenada X puede ir de 0 a dimensionMaximaCampo - tamaño
+            startPos = random.nextInt(dimensionMaximaCampo - tamanio + 1);
+            int fixedY = random.nextInt(dimensionMaximaCampo);
+            for (int i = 0; i < tamanio; i++) {
+                coordenadas[i] = new Coordenada(startPos + i, fixedY);
             }
-        }else{
-            for (int i=pos, j=0;i< pos+tamanio;i++,j++){
-                coordenadas[j] = new Coordenada(pos,i);
+        } else { // Vertical
+            // La coordenada Y puede ir de 0 a dimensionMaximaCampo - tamaño
+            startPos = random.nextInt(dimensionMaximaCampo - tamanio + 1);
+            int fixedX = random.nextInt(dimensionMaximaCampo);
+            for (int i = 0; i < tamanio; i++) {
+                coordenadas[i] = new Coordenada(fixedX, startPos + i);
             }
         }
     }
 
-    // verificar disparo
-    public boolean verificarDisparo(Coordenada disparo){
-        boolean acerto = false;
-        for (int i = 0; i < this.getCoordenadas().length;i++){
-            if (this.getCoordenadas()[i].equals((disparo))){
-                System.out.println("Acerto");
+    @Override
+    public boolean verificarDisparo(Coordenada disparo) {
+        for (int i = 0; i < this.getCoordenadas().length; i++) {
+            if (this.getCoordenadas()[i] != null && this.getCoordenadas()[i].equals(disparo)) {
+                // Podríamos marcar la coordenada como 'tocada' si quisiéramos un estado más granular
                 this.resistencia--;
-                acerto = true;
-                break;
-            }else{
-                System.out.println("fallaste");
+                System.out.println("¡Tocado en " + disparo + "! Resistencia restante: " + this.resistencia);
+                return true;
             }
         }
-        return acerto;
+        return false;
     }
 
-    //verifica hundimiento
-    public boolean verificaHundimiento(){
-        return this.resistencia == 0;
+    @Override
+    public boolean verificarHundimiento() {
+        boolean hundido = this.resistencia <= 0;
+        if (hundido) {
+            System.out.println("¡Barco de tamaño " + this.tamanio + " hundido!");
+        }
+        return hundido;
+    }
+
+    // Método para obtener el nombre del tipo de barco, útil para mensajes.
+    // Las subclases pueden sobrescribirlo.
+    public String getTipo() {
+        return "Barco Genérico";
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getTipo()).append(" de tamaño ").append(tamanio);
+        sb.append(" en [");
+        for (int i = 0; i < coordenadas.length; i++) {
+            if (coordenadas[i] != null) {
+                sb.append(coordenadas[i].toString());
+            } else {
+                sb.append("N/A");
+            }
+            if (i < coordenadas.length - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("], Dirección: ").append(direccion ? "Horizontal" : "Vertical");
+        sb.append(", Resistencia: ").append(resistencia);
+        return sb.toString();
     }
 }

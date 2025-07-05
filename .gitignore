@@ -1,0 +1,39 @@
+# Archivos de compilación de Java
+out/
+bin/
+*.class
+
+# Archivos de logs
+*.log
+
+# Archivos de empaquetado
+*.jar
+*.war
+*.ear
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración de IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# Archivos temporales o de caché
+*~
+*.swp
+*.swo
+
+# Archivo de lista de fuentes para compilación
+sources.txt
+
+# Directorios de dependencias (si se usan herramientas como Maven o Gradle)
+# target/
+# build/
+# .gradle/
+# .mvn/

@@ -1,89 +1,38 @@
 package clases.barco;
 
-import clases.coordenada.Coordenada;
-import clases.interfazbarcos.InterfazBarco;
-import java.util.Random;
+// Ya no necesita importar Coordenada directamente si no la usa explícitamente aquí
+// Ya no necesita importar InterfazBarco porque la hereda de Barco
+// Ya no necesita importar Random
 
-public class Lancha implements InterfazBarco {
+public class Lancha extends Barco {
     
-    private final Integer TAMANIO = 1;
-
-    private Integer resistencia = TAMANIO;
-    
-    private boolean direccion;
-    
-    private Coordenada[] coordenadas;
+    private static final Integer TAMANIO_LANCHA = 1;
 
     public Lancha(boolean direccion) {
-        this.direccion = direccion;
-        this.coordenadas = new Coordenada[this.TAMANIO];
-        this.generarBarco();
-    }
-    
-    public void generarBarco(){
-        Random r = new Random();
-        Integer pos = r.nextInt(TAMANIO);
-        while(pos + TAMANIO > 10){
-            pos= r.nextInt(10);
-        }
-        //Horizontal
-        if (this.direccion){
-            for (int i=pos, j=0;i< pos+TAMANIO;i++,j++){
-                coordenadas[j] = new Coordenada(i,pos);
-            }
-        }else{
-            for (int i=pos, j=0;i< pos+TAMANIO;i++,j++){
-                coordenadas[j] = new Coordenada(pos,i);
-            }
-        }
-    }
-    
-    public Integer getTAMANIO() {
-        return TAMANIO;
+        // Llama al constructor de la clase base (Barco)
+        // pasando el tamaño específico de la Lancha y la dirección.
+        super(TAMANIO_LANCHA, direccion);
+        // La generación de coordenadas se hará desde CampoBatalla o Main,
+        // pasando la dimensión del campo.
+        // this.generarCoordenadas(dimensionDelCampo); // Esto se llamará externamente
     }
 
-    public boolean isDireccion() {
-        return direccion;
-    }
+    // Los métodos generarBarco (ahora generarCoordenadas), verificarDisparo,
+    // y verificarHundimiento son heredados de la clase Barco.
+    // Ya no es necesario reimplementarlos aquí si la lógica es la misma.
 
-    public void setDireccion(boolean direccion) {
-        this.direccion = direccion;
-    }
-
-    public Coordenada[] getCoordenadas() {
-        return coordenadas;
-    }
-
-    public void setCoordenadas(Coordenada[] coordenadas) {
-        this.coordenadas = coordenadas;
-    }
-
-    public Integer getResistencia() {
-        return resistencia;
-    }
-
-    public void setResistencia(Integer resistencia) {
-        this.resistencia = resistencia;
-    }
-
+    // Opcional: Sobrescribir getTipo() para dar un nombre específico.
     @Override
-    public boolean verificarDisparo(Coordenada disparo) {
-        boolean acerto = false;
-        for (int i = 0; i < this.getCoordenadas().length;i++){
-            if (this.getCoordenadas()[i].equals((disparo))){
-                System.out.println("Acerto");
-                this.resistencia--;
-                acerto = true;
-                break;
-            }else{
-                System.out.println("fallaste");
-            }
-        }
-        return acerto;
+    public String getTipo() {
+        return "Lancha";
     }
 
-    @Override
-    public boolean verificarHundimiento() {
-        return this.resistencia == 0;
+    // Los getters y setters para direccion, coordenadas, resistencia
+    // son heredados de Barco (si se hicieron protected o public).
+    // Si eran private en Barco y se necesitan aquí, Barco debe proveer getters/setters protected.
+    // En nuestro caso, eran 'private' en el Barco original, y los hicimos 'protected' en el nuevo Barco.
+    // El getter para TAMANIO_LANCHA (si es necesario externamente)
+    public static Integer getTamanioLancha() {
+        return TAMANIO_LANCHA;
     }
 }

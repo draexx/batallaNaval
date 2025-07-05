@@ -1,66 +1,75 @@
 package clases.campobatalla;
 
+import clases.barco.Barco; // Importar la clase base Barco
 import clases.coordenada.Coordenada;
-import clases.interfazbarcos.InterfazBarco;
+// import clases.interfazbarcos.InterfazBarco; // Ya no es necesario si usamos Barco directamente
 
 import java.util.ArrayList;
+import java.util.HashSet; // Importar HashSet
+import java.util.Set;     // Importar Set
 
 public class CampoBatalla {
-    private Coordenada disparo;
+    private Coordenada ultimoDisparo; // Renombrado para mayor claridad
 
-    private Coordenada coordenadas;
+    // private Coordenada coordenadas; // Atributo no utilizado, eliminado.
 
-    private ArrayList<InterfazBarco> barcoEnCampo;
+    private ArrayList<Barco> barcosEnCampo; // Cambiado a ArrayList<Barco> y renombrado
 
-    private Integer dimension;
+    private Integer dimension = 10; // Dimensión por defecto del campo de batalla, inicializada.
 
-    private ArrayList<Coordenada> disparosRealizados;
+    private Set<Coordenada> disparosRealizados; // Cambiado a Set<Coordenada>
 
     /**
      * Constructores de la clase
      */
     public CampoBatalla() {
-        barcoEnCampo = new ArrayList<InterfazBarco>();
-        disparosRealizados = new ArrayList<Coordenada>();
+        barcosEnCampo = new ArrayList<Barco>();
+        disparosRealizados = new HashSet<Coordenada>();
+        // this.dimension ya está inicializada a 10
     }
 
     public CampoBatalla(Integer dimension){
-        this.setDimension(dimension);
+        this.dimension = dimension; // Establecer la dimensión
+        barcosEnCampo = new ArrayList<Barco>();
+        disparosRealizados = new HashSet<Coordenada>();
     }
 
     /**
      * Metodo que devuelve los disparos realizados
-     * @return Lista de disparos Realizados
+     * @return Conjunto de disparos Realizados
      */
-    public ArrayList<Coordenada> getDisparosRealizados() {
+    public Set<Coordenada> getDisparosRealizados() {
         return disparosRealizados;
     }
 
     /**
-     * Metodo para asignar el disparo realizado
-     * @param disparoRealizado de tipo ArrayList
+     * Metodo para asignar el conjunto de disparos realizados (generalmente no necesario si se gestiona internamente)
+     * @param disparosRealizados de tipo Set
      */
-    public void setDisparosRealizados(ArrayList<Coordenada> disparoRealizado) {
-        this.disparosRealizados = disparoRealizado;
+    public void setDisparosRealizados(Set<Coordenada> disparosRealizados) {
+        this.disparosRealizados = disparosRealizados;
     }
 
-    public Coordenada getDisparo() {
-        return disparo;
+    public Coordenada getUltimoDisparo() {
+        return ultimoDisparo;
     }
 
-    public void setDisparo(Coordenada disparo) {
-        this.disparo = disparo;
+    public void setUltimoDisparo(Coordenada ultimoDisparo) {
+        this.ultimoDisparo = ultimoDisparo;
     }
 
-    public ArrayList<InterfazBarco> getBarcoEnCampo() {
-        return barcoEnCampo;
+    public ArrayList<Barco> getBarcosEnCampo() { // Actualizado el tipo de retorno y nombre
+        return barcosEnCampo;
     }
 
-    public void setBarcoEnCampo(ArrayList<InterfazBarco> barcoEnCampo) {
-        this.barcoEnCampo = barcoEnCampo;
+    public void setBarcosEnCampo(ArrayList<Barco> barcosEnCampo) { // Actualizado el tipo de parámetro y nombre
+        this.barcosEnCampo = barcosEnCampo;
     }
 
     public Integer getDimension() {
+        if (this.dimension == null) { // Asegurar que dimensión tenga un valor
+            this.dimension = 10; // Valor por defecto si no se estableció
+        }
         return dimension;
     }
 
@@ -68,65 +77,69 @@ public class CampoBatalla {
         this.dimension = dimension;
     }
 
-    public Coordenada getCoordenadas() {
-        return coordenadas;
+    // Eliminado getCoordenadas y setCoordenadas (atributo 'coordenadas' fue eliminado)
+
+    /**
+     * Metodo para agregar barcos en campo.
+     * El barco ya debe tener sus coordenadas generadas antes de ser agregado,
+     * o se generan aquí.
+     * @param barco parametro de tipo Barco para agregar al campo
+     */
+    public void agregarBarco(Barco barco){ // Tipo de parámetro cambiado a Barco
+        // Es crucial que el barco tenga sus coordenadas generadas.
+        // Lo haremos aquí para asegurar consistencia, usando la dimensión del campo.
+        barco.generarCoordenadas(this.getDimension());
+        this.barcosEnCampo.add(barco);
     }
 
-    public void setCoordenadas(Coordenada coordenadas) {
-        this.coordenadas = coordenadas;
+    public void disparar(Coordenada coordenadaDisparo) {
+        this.setUltimoDisparo(coordenadaDisparo); // Guardar el último disparo
+
+        if (disparosRealizados.contains(coordenadaDisparo)) {
+            System.out.println("Disparo repetido en " + coordenadaDisparo + ". Intenta de nuevo.");
+            return; // No procesar más si el disparo es repetido
+        }
+
+        disparosRealizados.add(coordenadaDisparo);
+        System.out.println("Disparando a: " + coordenadaDisparo);
+
+        boolean impactoDetectado = false;
+        for (Barco barco : barcosEnCampo) {
+            if (barco.verificarDisparo(coordenadaDisparo)) {
+                impactoDetectado = true;
+                // El método verificarDisparo en Barco ya imprime "¡Tocado!"
+                if (barco.verificarHundimiento()) {
+                    // El método verificarHundimiento en Barco ya imprime "¡Barco hundido!"
+                    System.out.println("El " + barco.getTipo() + " ha sido completamente hundido.");
+                }
+                break; // Asumimos que una coordenada solo puede impactar un barco (o una parte de un barco)
+            }
+        }
+
+        if (!impactoDetectado) {
+            System.out.println("Agua. Ningún barco impactado en " + coordenadaDisparo);
+        }
+    }
+
+    public void mostrarBarcos(){ // Renombrado barcosEnCampo
+        for (Barco barco : barcosEnCampo){ // Uso de for-each y tipo Barco
+            System.out.println(barco.toString()); // Llamada explícita a toString() por claridad
+        }
     }
 
     /**
-     * Metodo para agregar barcos en campo
-     * @param barco parametro de tipo Barco para agregar al campo
+     * Verifica si todos los barcos en el campo de batalla han sido hundidos.
+     * @return true si todos los barcos están hundidos, false en caso contrario.
      */
-    public void agregarBarco(InterfazBarco barco){
-        this.barcoEnCampo.add(barco);
-    }
-
-    public void disparar(Coordenada disparo){
-        this.disparo = disparo;
-        boolean acierto = false;
-        boolean nuevoDisparo = true;
-        if (this.getDisparosRealizados().size() == 0){
-            this.getDisparosRealizados().add(disparo);
-            acierto = true;
-        }else{
-            for(int i =0; i< this.getDisparosRealizados().size();i++){
-                if(getDisparo().equals(this.getDisparosRealizados().get(i))){
-                    System.out.println("Ya existe el disparo");
-                    nuevoDisparo = false;
-                    break;
-                }
-            }
-            if(nuevoDisparo){
-                System.out.println("Nuevo disparo");
-                this.getDisparosRealizados().add(disparo);
-                acierto = true;
+    public boolean todosHundidos() {
+        if (barcosEnCampo.isEmpty()) {
+            return false; // No hay barcos, así que no pueden estar todos hundidos.
+        }
+        for (Barco barco : barcosEnCampo) {
+            if (!barco.verificarHundimiento()) {
+                return false; // Si al menos un barco no está hundido, entonces no todos están hundidos.
             }
         }
-        // verificacion disparo
-        if (acierto){
-                for (int i = 0; i<barcoEnCampo.size();i++){
-                    if(barcoEnCampo.get(i).verificarDisparo(this.getDisparo())){
-                        if (this.barcoEnCampo.get(i).verificarHundimiento()){
-                            System.out.println("Se hundio");
-                        }
-                        System.out.println("acerto");
-                        break;
-                    }else{
-                        System.out.println("fallaste");
-                    }
-
-                }
-        }else{
-            System.out.println("nose verifico porque ya existe");
-        }
-    }
-
-    public void mostrarBarcos(){
-        for (int i=0;i<barcoEnCampo.size();i++){
-            System.out.println(barcoEnCampo.get(i));
-        }
+        return true; // Todos los barcos están hundidos.
     }
 }

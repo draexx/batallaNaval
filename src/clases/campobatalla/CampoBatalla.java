@@ -142,4 +142,53 @@ public class CampoBatalla {
         }
         return true; // Todos los barcos están hundidos.
     }
+
+    public String dibujarTablero(boolean mostrarBarcos) {
+        StringBuilder sb = new StringBuilder();
+        char[][] tablero = new char[dimension][dimension];
+
+        // Inicializar el tablero con agua
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                tablero[i][j] = '~';
+            }
+        }
+
+        // Colocar los barcos en el tablero si se deben mostrar
+        if (mostrarBarcos) {
+            for (Barco barco : barcosEnCampo) {
+                for (Coordenada c : barco.getCoordenadas()) {
+                    if (c != null) {
+                        tablero[c.getPosY()][c.getPosX()] = 'B';
+                    }
+                }
+            }
+        }
+
+        // Marcar los disparos en el tablero
+        for (Coordenada disparo : disparosRealizados) {
+            boolean esImpacto = false;
+            for (Barco barco : barcosEnCampo) {
+                if (barco.fueImpactadoEn(disparo)) {
+                    esImpacto = true;
+                    break;
+                }
+            }
+            if (esImpacto) {
+                tablero[disparo.getPosY()][disparo.getPosX()] = 'X'; // Impacto
+            } else {
+                tablero[disparo.getPosY()][disparo.getPosX()] = 'O'; // Agua
+            }
+        }
+
+        // Construir el string del tablero
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                sb.append(tablero[i][j]).append(" ");
+            }
+            sb.append("\n");
+        }
+
+        return sb.toString();
+    }
 }

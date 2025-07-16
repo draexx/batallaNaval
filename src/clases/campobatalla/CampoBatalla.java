@@ -144,51 +144,64 @@ public class CampoBatalla {
     }
 
     public String dibujarTablero(boolean mostrarBarcos) {
-        StringBuilder sb = new StringBuilder();
-        char[][] tablero = new char[dimension][dimension];
+        char[][] tablero = inicializarTablero();
+        
+        if (mostrarBarcos) {
+            colocarBarcos(tablero);
+        }
+        
+        marcarDisparos(tablero);
+        
+        return convertirTableroAString(tablero);
+    }
 
-        // Inicializar el tablero con agua
+    private char[][] inicializarTablero() {
+        char[][] tablero = new char[dimension][dimension];
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
                 tablero[i][j] = '~';
             }
         }
+        return tablero;
+    }
 
-        // Colocar los barcos en el tablero si se deben mostrar
-        if (mostrarBarcos) {
-            for (Barco barco : barcosEnCampo) {
-                for (Coordenada c : barco.getCoordenadas()) {
-                    if (c != null) {
-                        tablero[c.getPosY()][c.getPosX()] = 'B';
-                    }
+    private void colocarBarcos(char[][] tablero) {
+        for (Barco barco : barcosEnCampo) {
+            for (Coordenada c : barco.getCoordenadas()) {
+                if (c != null) {
+                    tablero[c.getPosY()][c.getPosX()] = 'B';
                 }
             }
         }
+    }
 
-        // Marcar los disparos en el tablero
+    private void marcarDisparos(char[][] tablero) {
         for (Coordenada disparo : disparosRealizados) {
-            boolean esImpacto = false;
-            for (Barco barco : barcosEnCampo) {
-                if (barco.fueImpactadoEn(disparo)) {
-                    esImpacto = true;
-                    break;
-                }
-            }
-            if (esImpacto) {
-                tablero[disparo.getPosY()][disparo.getPosX()] = 'X'; // Impacto
+            if (esImpacto(disparo)) {
+                tablero[disparo.getPosY()][disparo.getPosX()] = 'X';
             } else {
-                tablero[disparo.getPosY()][disparo.getPosX()] = 'O'; // Agua
+                tablero[disparo.getPosY()][disparo.getPosX()] = 'O';
             }
         }
+    }
 
-        // Construir el string del tablero
+    private boolean esImpacto(Coordenada disparo) {
+        for (Barco barco : barcosEnCampo) {
+            if (barco.fueImpactadoEn(disparo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private String convertirTableroAString(char[][] tablero) {
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
                 sb.append(tablero[i][j]).append(" ");
             }
             sb.append("\n");
         }
-
         return sb.toString();
     }
 }

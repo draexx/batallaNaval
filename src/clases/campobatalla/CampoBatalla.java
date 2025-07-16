@@ -142,4 +142,66 @@ public class CampoBatalla {
         }
         return true; // Todos los barcos están hundidos.
     }
+
+    public String dibujarTablero(boolean mostrarBarcos) {
+        char[][] tablero = inicializarTablero();
+        
+        if (mostrarBarcos) {
+            colocarBarcos(tablero);
+        }
+        
+        marcarDisparos(tablero);
+        
+        return convertirTableroAString(tablero);
+    }
+
+    private char[][] inicializarTablero() {
+        char[][] tablero = new char[dimension][dimension];
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                tablero[i][j] = '~';
+            }
+        }
+        return tablero;
+    }
+
+    private void colocarBarcos(char[][] tablero) {
+        for (Barco barco : barcosEnCampo) {
+            for (Coordenada c : barco.getCoordenadas()) {
+                if (c != null) {
+                    tablero[c.getPosY()][c.getPosX()] = 'B';
+                }
+            }
+        }
+    }
+
+    private void marcarDisparos(char[][] tablero) {
+        for (Coordenada disparo : disparosRealizados) {
+            if (esImpacto(disparo)) {
+                tablero[disparo.getPosY()][disparo.getPosX()] = 'X';
+            } else {
+                tablero[disparo.getPosY()][disparo.getPosX()] = 'O';
+            }
+        }
+    }
+
+    private boolean esImpacto(Coordenada disparo) {
+        for (Barco barco : barcosEnCampo) {
+            if (barco.fueImpactadoEn(disparo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private String convertirTableroAString(char[][] tablero) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                sb.append(tablero[i][j]).append(" ");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }

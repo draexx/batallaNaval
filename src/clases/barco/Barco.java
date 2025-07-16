@@ -10,11 +10,13 @@ public abstract class Barco implements InterfazBarco {
     protected Integer resistencia;
     protected boolean direccion; // true para horizontal, false para vertical
     protected Coordenada[] coordenadas;
+    protected boolean[] partesImpactadas;
 
     public Barco(Integer tamanio, boolean direccion) {
         this.tamanio = tamanio;
         this.direccion = direccion;
         this.coordenadas = new Coordenada[tamanio];
+        this.partesImpactadas = new boolean[tamanio];
         this.resistencia = tamanio; // La resistencia inicial es igual al tamaño
     }
 
@@ -77,10 +79,21 @@ public abstract class Barco implements InterfazBarco {
     public boolean verificarDisparo(Coordenada disparo) {
         for (int i = 0; i < this.getCoordenadas().length; i++) {
             if (this.getCoordenadas()[i] != null && this.getCoordenadas()[i].equals(disparo)) {
-                // Podríamos marcar la coordenada como 'tocada' si quisiéramos un estado más granular
-                this.resistencia--;
-                System.out.println("¡Tocado en " + disparo + "! Resistencia restante: " + this.resistencia);
+                if (!partesImpactadas[i]) {
+                    this.partesImpactadas[i] = true;
+                    this.resistencia--;
+                    System.out.println("¡Tocado en " + disparo + "! Resistencia restante: " + this.resistencia);
+                }
                 return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean fueImpactadoEn(Coordenada disparo) {
+        for (int i = 0; i < this.getCoordenadas().length; i++) {
+            if (this.getCoordenadas()[i] != null && this.getCoordenadas()[i].equals(disparo)) {
+                return partesImpactadas[i];
             }
         }
         return false;

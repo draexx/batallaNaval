@@ -39,6 +39,7 @@ public class Main {
 
         while (!campo.todosHundidos()) {
             System.out.println("\n--- Nuevo Turno ---");
+            System.out.println(campo.dibujarTablero(true));
             System.out.print("Ingrese coordenada X para el disparo: ");
             corX = t.nextInt();
             System.out.print("Ingrese coordenada Y para el disparo: ");

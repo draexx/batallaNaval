@@ -40,12 +40,18 @@ public class Main {
         while (!campo.todosHundidos()) {
             System.out.println("\n--- Nuevo Turno ---");
             System.out.println(campo.dibujarTablero(true));
-            System.out.print("Ingrese coordenada X para el disparo: ");
-            corX = t.nextInt();
-            System.out.print("Ingrese coordenada Y para el disparo: ");
-            corY = t.nextInt();
-            coordenadaDisparo = new Coordenada(corX, corY);
+            do {
+                System.out.print("Ingrese coordenada X para el disparo: ");
+                corX = t.nextInt();
+                System.out.print("Ingrese coordenada Y para el disparo: ");
+                corY = t.nextInt();
 
+                if (corX < 0 || corX >= campo.getDimension() || corY < 0 || corY >= campo.getDimension()) {
+                    System.out.println("Coordenadas fuera de los límites del tablero. Inténtelo de nuevo.");
+                }
+            } while (corX < 0 || corX >= campo.getDimension() || corY < 0 || corY >= campo.getDimension());
+
+            coordenadaDisparo = new Coordenada(corX, corY);
             campo.disparar(coordenadaDisparo); // El método disparar ahora maneja los mensajes
         }
 

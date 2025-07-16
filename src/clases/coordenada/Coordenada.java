@@ -53,4 +53,9 @@ public class Coordenada {
         return (coordenada instanceof Coordenada) && (((Coordenada) coordenada).getPosX()
                 == this.posX && ((Coordenada) coordenada).getPosY() == this.posY);
     }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(posX, posY);
+    }
 }

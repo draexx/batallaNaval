@@ -19,6 +19,13 @@ public class CampoBatalla {
 
     private Set<Coordenada> disparosRealizados; // Cambiado a Set<Coordenada>
 
+    // Constantes para la representación del tablero
+    private static final char AGUA = '~';
+    private static final char BARCO = 'B';
+    private static final char IMPACTO = 'X';
+    private static final char AGUA_DISPARADA = 'O';
+
+
     /**
      * Constructores de la clase
      */
@@ -159,7 +166,7 @@ public class CampoBatalla {
         char[][] tablero = new char[dimension][dimension];
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                tablero[i][j] = '~';
+                tablero[i][j] = AGUA;
             }
         }
         return tablero;
@@ -169,7 +176,7 @@ public class CampoBatalla {
         for (Barco barco : barcosEnCampo) {
             for (Coordenada c : barco.getCoordenadas()) {
                 if (c != null) {
-                    tablero[c.getPosY()][c.getPosX()] = 'B';
+                    tablero[c.getPosY()][c.getPosX()] = BARCO;
                 }
             }
         }
@@ -178,9 +185,9 @@ public class CampoBatalla {
     private void marcarDisparos(char[][] tablero) {
         for (Coordenada disparo : disparosRealizados) {
             if (esImpacto(disparo)) {
-                tablero[disparo.getPosY()][disparo.getPosX()] = 'X';
+                tablero[disparo.getPosY()][disparo.getPosX()] = IMPACTO;
             } else {
-                tablero[disparo.getPosY()][disparo.getPosX()] = 'O';
+                tablero[disparo.getPosY()][disparo.getPosX()] = AGUA_DISPARADA;
             }
         }
     }

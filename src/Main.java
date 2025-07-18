@@ -33,12 +33,13 @@ public class Main {
         campo.agregarBarco(patrulla);
         campo.agregarBarco(lancha);
 
-        System.out.println("\nBarcos desplegados en el campo de batalla:");
+        System.out.println("\nBarcos desplegados en el campo de batalla: " + campo.getBarcosEnCampo().size());
         campo.mostrarBarcos();
         System.out.println("\n¡Comienza la batalla!");
 
         while (!campo.todosHundidos()) {
             System.out.println("\n--- Nuevo Turno ---");
+            System.out.println("Barcos hundidos: " + campo.getBarcosHundidos() + " de " + campo.getBarcosEnCampo().size());
             System.out.println(campo.dibujarTablero(true));
             do {
                 System.out.print("Ingrese coordenada X para el disparo: ");

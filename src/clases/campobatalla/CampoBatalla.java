@@ -150,6 +150,20 @@ public class CampoBatalla {
         return true; // Todos los barcos están hundidos.
     }
 
+    /**
+     * Metodo que devuelve el numero de barcos hundidos
+     * @return el numero de barcos hundidos
+     */
+    public int getBarcosHundidos() {
+        int barcosHundidos = 0;
+        for (Barco barco : barcosEnCampo) {
+            if (barco.verificarHundimiento()) {
+                barcosHundidos++;
+            }
+        }
+        return barcosHundidos;
+    }
+
     public String dibujarTablero(boolean mostrarBarcos) {
         char[][] tablero = inicializarTablero();
         
